@@ -1,0 +1,10 @@
+.jumbotron {
+    /* add bootstrap jumbotron background image */
+    background: url("/images/banner.jpg");
+    /* change bootstrap jumbotron text color */
+    color: #bd1108;
+}
+
+body {
+	background-color: #f4e851;
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>L8r Sk8r</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/halflings.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="/javascripts/admin.js"></script>
+</head>
+
+<body ng-app="sk8tApp">
+
+<div class="jumbotron">
+    <div class="container">
+        <h1>&nbsp;</h1>
+        <p style="margin-left: 150px">Admin Page</p>
+    </div>
+    <div class="col-xs-12" style="height:80px;">&nbsp;</div>
+    <div>&nbsp;</div>
+</div>
+
+<div ng-controller="sk8tAdminCtrl" ng-init="test=1">
+  <form class="form-horizontal">
+    <div class="container">
+      <h2>Park Information</h2>
+
+      <div class="table-responsive col-sm-offset-1 col-sm-10">
+        <table class="table table-condensed table-striped table-bordered no-margin">
+            <thead>
+            <th style="width:15%">Park</th>
+            <th style="width:25%" class="hidden-phone">Location</th>
+            <th style="width:5%" class="hidden-phone">Rating</th>
+            <th style="width:40%" class="hidden-phone">Description</th>
+            <td style="width:10%" class="hidden-phone">&nbsp;</td>
+          </thead>
+          <tbody>
+            <tr ng-repeat="parkRow in parkRows">
+              <td>
+                <span>{{ parkRow.park }}</span>
+              </td>
+              <td>
+                <span>{{ parkRow.location }}</span>
+              </td>
+              <td align="center">
+                <span>{{ parkRow.rating }}</span>
+              </td>
+              <td>
+                <span>{{ parkRow.descript }}</span>
+              </td>
+              <td align="center">
+                  <a href ng-click="editSkatepark(parkRow.id)">Edit</a>&nbsp;|&nbsp;
+                  <a href ng-click="deleteSkatepark(parkRow.id)">Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <br/>
+    
+    <div class="container">
+      <h2>Save Park</h2>
+      <input type="hidden" ng-model="newPark.id"/>
+
+      <div class="table-responsive col-sm-offset-1 col-sm-5">
+        <table>
+          <tr>
+            <td>
+              <label for="park">Park Name:</label>
+            </td><td>
+              <input type="text" name="park" id="park" ng-model="newPark.park" placeholder="Park Name" required/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="location">Location:</label>  
+            </td><td>
+              <input type="text" name="location" id="location" ng-model="newPark.location" placeholder="Location" size=45/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="rating">Rating:</label>
+            </td><td>  
+              <input type="number" name="rating" id="rating" ng-model="newPark.rating" placeholder="Rating 1-5" required size=15/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="description">Description:</label>
+            </td><td>
+              <input type="text" name="description" id="description" ng-model="newPark.descript" placeholder="Description" size=45/>
+            </td>    
+          </tr>        
+        </table>
+      </div>
+
+      <div class="table-responsive col-sm-offset-1 col-sm-5">
+        <div class="row">
+          <input type="button" class="btn btn-primary" value="Save" ng-show="displaySave" ng-click="createSkatepark()"/>
+          <input type="button" class="btn btn-primary" value="Update" ng-show="displayUpdate" ng-click="updateSkatepark()"/>
+        </div>
+        <div class="row">
+          <div class="alert alert-info" ng-show="status">
+            <strong>Info:</strong> {{status}}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </form>    
+</div>
+
+</body>
+</html>
